@@ -2,7 +2,7 @@
 
 Sistema desenvolvido em **programação lógica** para auxiliar estudantes no gerenciamento de sua vida acadêmica: disciplinas, atividades, horários e desempenho.
 
-O projeto foi implementado utilizando a linguagem **entity["software","Prolog"]**, explorando conceitos centrais do **Paradigma Lógico**, como:
+O projeto foi implementado utilizando a linguagem prolog, explorando conceitos centrais do **Paradigma Lógico**, como:
 
 - Representação de conhecimento através de **fatos**
 - Definição de **regras lógicas**
@@ -83,7 +83,7 @@ Cada módulo representa **uma parte da base de conhecimento e do raciocínio ló
 
 # Interligação entre os módulos e o Paradigma Lógico
 
-## `main.pl` — Motor de execução
+## `main.pl` — executador
 
 Arquivo responsável por:
 
@@ -297,7 +297,7 @@ O sistema funciona como um **motor de inferência acadêmico**.
 
 # Como executar
 
-Instale o **entity["software","SWI-Prolog"]**.
+Instale o SWI-Prolog.
 
 Depois execute:
 
@@ -333,33 +333,4 @@ Persistência de dados
 
 # Conclusão
 
-O projeto demonstra como o **Paradigma Lógico** pode ser aplicado para modelar sistemas reais.
-
-Principais vantagens observadas:
-
-- Representação natural de conhecimento
-- Regras declarativas
-- Inferência automática
-- Código expressivo e compacto
-
-O **GVA** mostra que **programação lógica não é apenas teórica**, podendo ser aplicada para resolver problemas práticos do cotidiano acadêmico.
-
----
-
-Sistema ideal para estudo de:
-
-- Programação Lógica
-- Modelagem de conhecimento
-- Sistemas baseados em regras
-- Prolog aplicado
-
----
-
-Se quiser, também posso te entregar uma **versão ainda melhor do README** com:
-
-- diagramas
-- fluxograma do sistema
-- modelo lógico
-- exemplos de consultas Prolog
-
-Isso deixaria o projeto **nível GitHub profissional / nota máxima na disciplina**.
+O projeto demonstra como o **Paradigma Lógico** pode ser aplicado para modelar sistemas reais. O **GVA** mostra que **programação lógica não é apenas teórica**, podendo ser aplicada para resolver problemas práticos do cotidiano acadêmico.
