@@ -1,185 +1,253 @@
-# Documento Técnico — Gerenciador de Vida Acadêmica (GVA)
+# Documentação do Projeto -- GVA (Gerenciador de Vida Acadêmica)
 
-**Projeto:** Gerenciador de Vida Acadêmica (GVA)  
-**Disciplina:** Paradigmas de Linguagens de Programação  
-**Implementação:** paradigma declarativo / funcional (sem referência a linguagem específica)
+## Visão Geral
 
----
+O **GVA (Gerenciador de Vida Acadêmica)** é um sistema desenvolvido em
+**Prolog** com o objetivo de auxiliar estudantes na organização de sua
+vida acadêmica.\
+O sistema permite gerenciar disciplinas, atividades, horários e calcular
+o **IRA (Índice de Rendimento Acadêmico)**, além de manter persistência
+dos dados.
 
-## Introdução
+O projeto foi dividido em módulos independentes para facilitar o
+desenvolvimento, manutenção e organização do código.
 
-O **Gerenciador de Vida Acadêmica (GVA)** é um sistema modular projetado para auxiliar estudantes na organização de sua rotina acadêmica: disciplinas, atividades, horários e acompanhamento de desempenho. Este documento descreve a organização do projeto, a participação dos integrantes e — com ênfase teórica — a relação conceitual entre o sistema e o **paradigma lógico**.
+Arquitetura geral:
 
-A proposta do GVA é apresentar uma **modelagem declarativa do domínio acadêmico**, onde conhecimento é representado de forma explícita e regras são usadas para inferir novos fatos a partir dos existentes. Mesmo sendo implementado numa linguagem funcional/imperativa no código, o projeto foi pensado para enfatizar os princípios do paradigma lógico: fatos, regras e consultas.
+-   `main.pl` inicializa o sistema e controla o menu principal.
+-   Os módulos em `src/` implementam as funcionalidades específicas.
+-   O diretório `data/` armazena o banco de dados persistente.
 
----
+------------------------------------------------------------------------
 
-## Objetivo deste documento
+# Estrutura do Projeto
 
-1. Apresentar a arquitetura e responsabilidades do projeto.  
-2. Documentar a participação dos integrantes, mantendo os nomes exatamente como previstos no arquivo original.  
-3. Explicitar, com profundidade teórica, como os conceitos do **paradigma lógico** se aplicam ao GVA e de que forma o sistema materializa essas ideias.
+    Projeto_GVA_Prolog
+    │
+    ├── main.pl
+    ├── src
+    │   ├── util.pl
+    │   ├── persistencia.pl
+    │   ├── disciplinas.pl
+    │   ├── atividades.pl
+    │   ├── horarios.pl
+    │   └── ira.pl
+    │
+    └── data
+        └── gva_db.pl
 
-(Arquivo original analisado e utilizado como base: fileciteturn0file0)
+------------------------------------------------------------------------
 
----
+# Divisão de Responsabilidades
 
-## Organização geral do projeto
+## Arthur --- Main e Utilitários
 
-O sistema foi organizado de forma modular, com cada componente tendo responsabilidade bem definida para facilitar manutenção, testes e evolução.
+Arthur foi responsável pela **estrutura central do sistema** e pelas
+**funções utilitárias usadas em todos os módulos**.
 
-Estrutura conceitual (exemplo):
+### main.pl
 
-```
-Main
-Types
-Disciplinas
-Atividades
-Horarios
-Persistence
-```
+Este arquivo representa o **ponto de entrada do sistema**.
 
-Cada módulo contém um conjunto de operações puras (ou que isolam efeitos) que manipulam estruturas de dados que representam o conhecimento do domínio.
+Responsabilidades:
 
----
+-   Inicializar o sistema
+-   Carregar todos os módulos necessários
+-   Controlar o fluxo do programa
+-   Apresentar o menu principal ao usuário
 
-## Participação dos integrantes (mantidos exatamente)
+Principais funções:
 
-### Arthur — Módulo Main
+-   `iniciar/0`
+-   `menu_principal/0`
+-   `tratar_opcao_principal/1`
 
-Responsável pelo ponto de entrada do sistema e pela orquestração das chamadas entre módulos. Implementou a interface textual (CLI), fluxo de menu e roteamento de consultas.
+Esse arquivo é responsável por **integrar todos os módulos do projeto**,
+garantindo que as funcionalidades funcionem de forma coordenada.
 
-Principais responsabilidades técnicas:
-- Coordenação de execução e invocação de operações.
-- Separação entre lógica de negócio e código de I/O (operações com efeitos).
-- Composição de funções para construir fluxos reutilizáveis.
+------------------------------------------------------------------------
 
+### util.pl
 
-### Gustavo — Módulo Types
+O módulo de utilidades fornece **funções auxiliares reutilizáveis** para
+facilitar a interação com o usuário.
 
-Responsável pela modelagem de dados do sistema: definiu as estruturas que representam disciplinas, atividades, horários e o estado global.
+Responsabilidades:
 
-Principais responsabilidades técnicas:
-- Definição dos tipos de domínio.
-- Validação estrutural de dados.
-- Garantia de coerência semântica entre módulos.
+-   Leitura segura de entradas do usuário
+-   Conversão de tipos de dados
+-   Padronização da entrada de informações
 
+Principais funções:
 
-### Leandro — Módulos Persistence e Horarios
+-   `ler_string/2`
+-   `ler_texto/2`
+-   `ler_inteiro/2`
+-   `ler_real/2`
 
-Responsável pela persistência dos dados e pelo controle da grade de horários.
+Essas funções são utilizadas em praticamente todos os módulos do
+sistema.
 
-Principais responsabilidades técnicas:
-- Serialização / desserialização do estado do sistema.
-- Leitura e escrita segura de arquivos de armazenamento.
-- Inserção, remoção e verificação de conflitos de horários.
+------------------------------------------------------------------------
 
+# Leandro --- Persistência de Dados
 
-### Oscar — Módulo Disciplinas
+Leandro implementou o sistema de **armazenamento permanente das
+informações do sistema**.
 
-Responsável pelo gerenciamento de disciplinas: cadastro, remoção, listagem e preparação de dados para cálculos acadêmicos (como o IRA).
+### persistencia.pl
 
-Principais responsabilidades técnicas:
-- Manipulação de coleções de disciplinas.
-- Geração de relatórios e dados agregados.
+Esse módulo é responsável por garantir que os dados do sistema sejam
+**salvos e carregados automaticamente**.
 
+Responsabilidades:
 
-### Igor — Módulo Atividades
+-   Definir predicados dinâmicos
+-   Carregar dados do banco de dados
+-   Salvar dados atualizados
+-   Gerenciar o arquivo de persistência
 
-Responsável pelo gerenciamento de atividades acadêmicas: criação, atualização de status, listagem e vinculação com disciplinas.
+Principais funções:
 
-Principais responsabilidades técnicas:
-- Modelagem das atividades como entidades do domínio.
-- Operações puras de transformação sobre coleções de atividades.
+-   `carregar_dados/0`
+-   `salvar_dados/0`
 
----
+------------------------------------------------------------------------
 
-## Modelagem conceitual e relação com o Paradigma Lógico
+### gva_db.pl
 
-Abaixo apresentamos um mapeamento detalhado entre conceitos do paradigma lógico e os artefatos do GVA, seguido por considerações teóricas relevantes.
+Arquivo responsável por armazenar os **fatos do sistema**, como:
 
-### Mapeamento entre paradigma lógico e GVA
+-   disciplinas cadastradas
+-   atividades
+-   horários
+-   notas e créditos para cálculo do IRA
 
-| Paradigma Lógico | Representação no GVA |
-|------------------|----------------------|
-| Fato             | Estrutura de dado (registro/objeto) que descreve uma entidade (ex.: disciplina, atividade, bloco de horário) |
-| Regra            | Função pura que deriva informação a partir de fatos (ex.: cálculo de IRA, detecção de conflitos) |
-| Consulta         | Chamadas às funções que filtram/consultam o estado do sistema |
-| Base de conhecimento | Conjunto de estruturas de dados que representam o estado atual (em memória ou persistido) |
-| Inferência       | Composição de funções e aplicação de regras para gerar novo conhecimento ou resposta |
+Esse arquivo funciona como um **banco de dados simples em Prolog**.
 
-### Fundamentos teóricos explorados
+------------------------------------------------------------------------
 
-1. **Representação de conhecimento** — No paradigma lógico, o conhecimento é codificado como fatos e regras. No GVA, cada entidade do domínio (disciplina, atividade, horário) é explicitada em estruturas de dados; essas estruturas são os "fatos" da nossa base.
+# Gustavo --- Módulo de Disciplinas
 
-2. **Regras e inferência** — Regras lógicas (como implicações) são análogas às funções que, dadas coleções de fatos, retornam conclusões: por exemplo, uma função que identifica atividades pendentes ou que computa o IRA a partir de notas e cargas horárias.
+Gustavo desenvolveu o módulo responsável por **gerenciar as disciplinas
+do aluno**.
 
-3. **Unificação e correspondência** — Embora unificação (matching) seja um mecanismo nativo em linguagens lógicas, o GVA reproduz esse comportamento por meio de padrões de combinação e filtragem (pattern matching em linguagens funcionais / comparações estruturais em outras). Isso permite encontrar fatos que satisfaçam um padrão (ex.: todas as atividades com prazo em uma data específica).
+### disciplinas.pl
 
-4. **Backtracking e busca** — Em Prolog o backtracking permite explorar alternativas automaticamente. No GVA, algoritmos de busca e filtros podem ser escritos para simular essa exploração: por exemplo, tentar combinações de horários até encontrar uma grade sem conflito.
+Esse módulo permite cadastrar e manipular disciplinas no sistema.
 
-5. **Horn clauses e clausulação** — Muitas regras úteis podem ser entendidas como cláusulas de Horn (uma conclusão derivada de um conjunto de premissas). No nosso contexto, uma função que determina "aluno em risco" a partir de condições (IRA baixo, muitas atividades pendentes) equivale a uma regra composta por premissas.
+Funcionalidades implementadas:
 
-6. **Base de conhecimento dinâmica** — A persistência das estruturas de dados permite manter e evoluir a base de conhecimento ao longo do tempo: inserções, remoções e atualizações alteram o conjunto de fatos disponíveis para inferência.
+-   Cadastro de disciplina
+-   Listagem de disciplinas
+-   Remoção de disciplina
+-   Consulta de disciplina
 
----
+Cada disciplina pode conter informações como:
 
-## Exemplos conceituais (pseudo-regras / pseudocódigo)
+-   nome da disciplina
+-   código
+-   carga horária
+-   créditos
 
-A seguir, exemplos ilustrativos que mostram como formular regras e consultas em estilo lógico, traduzidas para uma representação declarativa agnóstica de linguagem.
+Esse módulo serve como **base para outras funcionalidades do sistema**,
+como atividades e cálculo do IRA.
 
-### Exemplo 1 — Fatos (representação)
+------------------------------------------------------------------------
 
-- Disciplina(ID, Código, Nome, CH, Situação, Período)
-- Atividade(ID, DisciplinaID, Título, Tipo, Status, Prazo)
-- BlocoHorario(Dia, Inicio, Fim, DisciplinaID)
+# Igor --- Módulo de Atividades
 
-### Exemplo 2 — Regra: Atividades pendentes
+Igor implementou o gerenciamento de **atividades acadêmicas**.
 
-```
-AtividadesPendentes(Estado) = filter(atividade -> atividade.status == PENDENTE, Estado.atividades)
-```
+### atividades.pl
 
-### Exemplo 3 — Regra: Conflito de horários
+Este módulo permite registrar atividades relacionadas às disciplinas.
 
-```
-Conflito(blocoA, blocoB) = (blocoA.dia == blocoB.dia) && (intervalsOverlap(blocoA.inicio, blocoA.fim, blocoB.inicio, blocoB.fim))
+Funcionalidades:
 
-ExisteConflito(grade) = exists(pairs in grade, Conflito(pair.a, pair.b))
-```
+-   Cadastro de atividades
+-   Associação de atividades a disciplinas
+-   Listagem de atividades
+-   Remoção de atividades
 
-### Exemplo 4 — Regra: Cálculo simplificado de IRA
+Exemplos de atividades:
 
-```
-IRA = sum_over_disciplinas(nota * peso) / sum_over_disciplinas(peso)
+-   provas
+-   trabalhos
+-   exercícios
+-   projetos
 
-onde peso pode ser definido pela carga horária
-```
+Esse módulo ajuda o estudante a **acompanhar suas responsabilidades
+acadêmicas**.
 
-Esses exemplos mostram como regras declarativas podem ser expressas e aplicadas à base de fatos para derivar conhecimento.
+------------------------------------------------------------------------
 
----
+# Oscar --- IRA e Horários
 
-## Boas práticas adotadas e recomendações arquiteturais
+Oscar foi responsável pelos módulos de **organização de horários e
+cálculo do IRA**.
 
-- **Separação clara entre código puro e operações de I/O**: facilita testes e raciocínio formal sobre o sistema.
-- **Modelagem explícita do domínio**: usar tipos/estruturas autoexplicativas para facilitar a analogia com fatos lógicos.
-- **Isolamento das regras de negócio**: concentrar inferências em funções puras que recebem um estado e retornam conclusões, aproximando-se do comportamento de um motor lógico.
-- **Persistência controlada**: manter serialização/deserialização centralizada para preservar a consistência da base de conhecimento.
-- **Testes baseados em exemplos lógicos**: criar casos de teste que funcionem como "consultas" e validem as regras de inferência.
+------------------------------------------------------------------------
 
----
+## horarios.pl
 
-## Considerações finais
+Esse módulo permite organizar os **horários das disciplinas**.
 
-Este documento apresenta o GVA sob o viés da modelagem declarativa e da teoria do paradigma lógico, mantendo a identificação dos integrantes conforme o arquivo original. A versão apresentada aqui **não faz referência a nenhuma linguagem específica** e foca em explicar como os conceitos lógicos foram aplicados ao projeto, tornando-o um material adequado para relatório de disciplina e para conferência técnica.
+Funcionalidades:
 
-Se desejarem, posso gerar:
-- um README.md pronto para o repositório com seções resumidas e instruções de uso;  
-- diagramas conceituais (modelo entidade-relacionamento e fluxo de inferência);  
-- exemplos de testes/consultas na forma de scripts que simulam consultas lógicas.
+-   Cadastro de horário de aula
+-   Associação com disciplinas
+-   Consulta de horários cadastrados
 
----
+Com isso, o estudante pode visualizar sua **grade semanal de aulas**.
 
-*Documento gerado com base no arquivo original enviado e analisado.*
+------------------------------------------------------------------------
 
+## ira.pl
+
+O módulo de IRA é responsável pelo **cálculo do Índice de Rendimento
+Acadêmico**.
+
+Funcionalidades:
+
+-   Registro de notas
+-   Registro de créditos das disciplinas
+-   Cálculo automático do IRA
+
+O cálculo considera:
+
+-   notas obtidas
+-   carga de créditos
+-   disciplinas cursadas
+
+Esse módulo fornece ao estudante uma **visão clara do seu desempenho
+acadêmico**.
+
+------------------------------------------------------------------------
+
+# Conclusão
+
+O projeto foi estruturado de forma modular para facilitar o
+desenvolvimento colaborativo.
+
+Cada integrante contribuiu com um conjunto específico de
+funcionalidades:
+
+  -----------------------------------------------------------------------
+  Integrante                    Responsabilidade
+  ----------------------------- -----------------------------------------
+  Arthur                        Estrutura principal do sistema
+                                (`main.pl`) e utilidades (`util.pl`)
+
+  Leandro                       Persistência de dados (`persistencia.pl`)
+
+  Gustavo                       Gerenciamento de disciplinas
+
+  Igor                          Sistema de atividades
+
+  Oscar                         Cálculo de IRA e organização de horários
+  -----------------------------------------------------------------------
+
+Essa divisão permitiu que o sistema fosse desenvolvido de forma
+organizada, mantendo **separação de responsabilidades e melhor
+manutenção do código**.
