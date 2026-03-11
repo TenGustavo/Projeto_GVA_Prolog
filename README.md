@@ -1,16 +1,16 @@
 # Gerenciador de Vida Acadêmica (GVA) — Prolog
 
-Sistema desenvolvido em **programação lógica** para auxiliar estudantes no gerenciamento de sua vida acadêmica: disciplinas, atividades, horários e desempenho.
+Sistema desenvolvido em programação lógica para auxiliar estudantes no gerenciamento de sua vida acadêmica: disciplinas, atividades, horários e desempenho.
 
-O projeto foi implementado utilizando a linguagem prolog, explorando conceitos centrais do **Paradigma Lógico**, como:
+O projeto foi implementado utilizando a linguagem prolog, explorando conceitos centrais do Paradigma Lógico, como:
 
-- Representação de conhecimento através de **fatos**
-- Definição de **regras lógicas**
+- Representação de conhecimento através de fatos
+- Definição de regras lógicas
 - Inferência automática
-- **Backtracking**
+- Backtracking
 - Base de conhecimento dinâmica
 
-O sistema simula um **assistente acadêmico inteligente**, capaz de armazenar dados e realizar inferências sobre o estado acadêmico do estudante.
+O sistema simula um assistente acadêmico inteligente, capaz de armazenar dados e realizar inferências sobre o estado acadêmico do estudante.
 
 ---
 
@@ -24,7 +24,7 @@ O **Gerenciador de Vida Acadêmica (GVA)** foi desenvolvido para:
 - Calcular desempenho acadêmico (IRA)
 - Armazenar dados persistentes
 
-Além disso, o projeto demonstra **como o Paradigma Lógico pode ser utilizado para modelar sistemas reais**, utilizando regras e inferência em vez de estruturas imperativas tradicionais.
+Além disso, o projeto demonstra como o Paradigma Lógico pode ser utilizado para modelar sistemas reais, utilizando regras e inferência em vez de estruturas imperativas tradicionais.
 
 ---
 
@@ -32,9 +32,9 @@ Além disso, o projeto demonstra **como o Paradigma Lógico pode ser utilizado p
 
 No Paradigma Lógico, um programa é composto por:
 
-- **Fatos** → dados armazenados na base de conhecimento  
-- **Regras** → relações lógicas entre fatos  
-- **Consultas** → perguntas feitas ao sistema
+- Fatos → dados armazenados na base de conhecimento  
+- Regras → relações lógicas entre fatos  
+- Consultas → perguntas feitas ao sistema
 
 Este projeto utiliza exatamente essa estrutura.
 
@@ -46,11 +46,11 @@ atividade(Id, DisciplinaId, Titulo, Descricao, Tipo, Status, Prazo).
 bloco(Dia, Inicio, Fim, Tipo, Disciplina, Rotulo).
 ```
 
-A partir desses fatos, o sistema pode **inferir informações**, como:
+A partir desses fatos, o sistema pode inferir informações, como:
 
-- cálculo do **IRA**
-- detecção de **choque de horários**
-- identificação de **atividades pendentes**
+- cálculo do IRA
+- detecção de choque de horários
+- identificação de atividades pendentes
 
 ---
 
@@ -77,7 +77,7 @@ Projeto_GVA_Prolog
 └── README.md
 ```
 
-Cada módulo representa **uma parte da base de conhecimento e do raciocínio lógico do sistema**.
+Cada módulo representa uma parte da base de conhecimento e do raciocínio lógico do sistema.
 
 ---
 
@@ -105,9 +105,9 @@ Ele conecta todos os módulos:
 
 ### Relação com Paradigma Lógico
 
-O `main.pl` atua como **controlador de consultas** à base de conhecimento.
+O `main.pl` atua como controlador de consultas à base de conhecimento.
 
-Ele não executa algoritmos complexos — apenas **faz perguntas ao sistema lógico**.
+Ele não executa algoritmos complexos — apenas faz perguntas ao sistema lógico.
 
 ---
 
@@ -133,9 +133,9 @@ disciplina(1, "COMP101", "Programação", "Prof. João", 60, cursando, 2024.1, n
 
 ### Paradigma lógico
 
-Aqui ocorre a **representação de conhecimento**:
+Aqui ocorre a representação de conhecimento:
 
-As disciplinas são modeladas como **fatos na base lógica**.
+As disciplinas são modeladas como fatos na base lógica.
 
 Consultas podem ser feitas como:
 
@@ -171,7 +171,7 @@ Relacionamento entre entidades:
 Disciplina -> possui -> Atividades
 ```
 
-O sistema usa **relações lógicas entre fatos** para organizar informações.
+O sistema usa relações lógicas entre fatos para organizar informações.
 
 ---
 
@@ -185,11 +185,11 @@ Permite:
 - remover horários
 - listar agenda
 
-O sistema impede **choque de horários**.
+O sistema impede choque de horários.
 
 ### Paradigma lógico
 
-A detecção de conflito é feita através de **regras lógicas** que verificam:
+A detecção de conflito é feita através de regras lógicas que verificam:
 
 ``` id="3vqty9"
 Se dois blocos possuem
@@ -198,13 +198,13 @@ intervalos sobrepostos
 então existe choque
 ```
 
-Esse tipo de verificação é **natural em programação lógica**, pois funciona como uma **consulta sobre relações**.
+Esse tipo de verificação é natural em programação lógica, pois funciona como uma consulta sobre relações.
 
 ---
 
 # 4. Desempenho Acadêmico (`ira.pl`)
 
-Calcula o **IRA (Índice de Rendimento Acadêmico)**.
+Calcula o IRA (Índice de Rendimento Acadêmico).
 
 O cálculo é baseado em:
 
@@ -222,13 +222,13 @@ Essa regra gera termos que posteriormente são agregados para calcular o IRA.
 
 ### Paradigma lógico
 
-Este módulo demonstra **inferência lógica e agregação de conhecimento**.
+Este módulo demonstra inferência lógica e agregação de conhecimento.
 
 O sistema:
 
-1️coleta todos os fatos relevantes  
-2️aplica regras  
-3️produz um novo conhecimento (IRA)
+1) coleta todos os fatos relevantes  
+2) aplica regras  
+3) produz um novo conhecimento (IRA)
 
 ---
 
@@ -248,11 +248,11 @@ data/gva_db.pl
 
 ### Paradigma lógico
 
-A base de dados é simplesmente **um conjunto de fatos Prolog**.
+A base de dados é simplesmente um conjunto de fatos Prolog.
 
 Ou seja:
 
-O próprio banco de dados **é uma base lógica**.
+O próprio banco de dados é uma base lógica.
 
 ---
 
@@ -271,7 +271,7 @@ parse_hora_min
 fmt_hora
 ```
 
-Esse módulo ajuda os outros módulos a **interagir com o usuário**.
+Esse módulo ajuda os outros módulos a interagir com o usuário.
 
 ---
 
@@ -291,7 +291,7 @@ Inferência
 Resposta ao usuário
 ```
 
-O sistema funciona como um **motor de inferência acadêmico**.
+O sistema funciona como um motor de inferência acadêmico.
 
 ---
 
