@@ -226,9 +226,9 @@ Este módulo demonstra **inferência lógica e agregação de conhecimento**.
 
 O sistema:
 
-1️⃣ coleta todos os fatos relevantes  
-2️⃣ aplica regras  
-3️⃣ produz um novo conhecimento (IRA)
+1️coleta todos os fatos relevantes  
+2️aplica regras  
+3️produz um novo conhecimento (IRA)
 
 ---
 
@@ -321,13 +321,13 @@ iniciar.
 
 # Funcionalidades
 
-✔ Cadastro de disciplinas  
-✔ Registro de atividades  
-✔ Controle de prazos  
-✔ Agenda semanal  
-✔ Bloqueio de choque de horários  
-✔ Cálculo automático do IRA  
-✔ Persistência de dados  
+Cadastro de disciplinas  
+Registro de atividades  
+Controle de prazos  
+Agenda semanal  
+Bloqueio de choque de horários  
+Cálculo automático do IRA  
+Persistência de dados  
 
 ---
 
