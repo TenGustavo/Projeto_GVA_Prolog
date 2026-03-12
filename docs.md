@@ -18,8 +18,7 @@ desenvolvimento, manutenção e organização do código.
 
 ## Arthur --- Main e Utilitários
 
-Arthur foi responsável pela estrutura central do sistema e pelas 
-funções utilitárias usadas em todos os módulos.
+Arthur foi responsável pela estrutura central do sistema e pelos predicados utilitários usadas em todos os módulos.
 
 ### main.pl
 
@@ -32,7 +31,7 @@ Responsabilidades:
 -   Controlar o fluxo do programa
 -   Apresentar o menu principal ao usuário
 
-Principais funções:
+Principais predicados:
 
 -   `iniciar/0`
 -   `menu_principal/0`
