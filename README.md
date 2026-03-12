@@ -301,22 +301,9 @@ Instale o SWI-Prolog.
 
 Depois execute:
 
-```bash id="rw35nu"
-swipl
 ```
-
-Carregue o projeto:
-
-```prolog id="691t4w"
-consult('main.pl').
+swipl -s main.pl -g iniciar
 ```
-
-Inicie o sistema:
-
-```prolog id="odq7o3"
-iniciar.
-```
-
 ---
 
 # Funcionalidades
